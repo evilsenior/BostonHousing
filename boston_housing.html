@@ -13163,6 +13163,7 @@ div#notebook {
 <span class="n">features</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;MEDV&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
     
 <span class="c1"># Success</span>
+<span class="nb">print</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">prices</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Boston housing dataset has </span><span class="si">{}</span><span class="s2"> data points with </span><span class="si">{}</span><span class="s2"> variables each.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 </pre></div>
 
@@ -13180,7 +13181,8 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Boston housing dataset has 489 data points with 4 variables each.
+<pre>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+Boston housing dataset has 489 data points with 4 variables each.
 </pre>
 </div>
 </div>
@@ -13219,23 +13221,25 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">newprices</span><span class="o">=</span><span class="n">prices</span><span class="o">.</span><span class="n">values</span>
+<span class="nb">print</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">newprices</span><span class="p">))</span>
+<span class="c1"># TODO: Minimum price of the data</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">newprices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">newprices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
-<span class="n">mean_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">newprices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
 <span class="c1"># TODO: Median price of the data</span>
-<span class="n">median_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">newprices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Standard deviation of prices of the data</span>
-<span class="n">std_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">std_price</span> <span class="o">=</span> <span class="n">newprices</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
 
 <span class="c1"># Show the calculated statistics</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistics for Boston housing dataset:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -13260,13 +13264,14 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Statistics for Boston housing dataset:
+<pre>&lt;class &#39;numpy.ndarray&#39;&gt;
+Statistics for Boston housing dataset:
 
 Minimum price: $105000.00
 Maximum price: $1024800.00
 Mean price: $454342.94
 Median price $438900.00
-Standard deviation of prices: $165340.28
+Standard deviation of prices: $165171.13
 </pre>
 </div>
 </div>
@@ -13294,8 +13299,8 @@ Standard deviation of prices: $165340.28
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="&#38382;&#39064;-1---&#22238;&#31572;&#65306;">&#38382;&#39064; 1 - &#22238;&#31572;&#65306;<a class="anchor-link" href="#&#38382;&#39064;-1---&#22238;&#31572;&#65306;">&#182;</a></h3><p>价格与RM 正相关，随着RM增加，房屋面积增大，价格升高。
-价格与LSTAT负相关，整体人群的购买力越低，该区域的房屋价格越低
-价格与PTRATIO成正相关，学生人越多，老师越少，学区房的优势更明显，价格越高。</p>
+价格与LSTAT负相关，整体人群的购买力越低，该区域的房屋价格越低。
+价格与PTRATIO成正相关，学生人越多，老师越少，学区房的优势更明显，教育资源越好，房子价格越高。</p>
 
 </div>
 </div>
@@ -14134,7 +14139,7 @@ Predicted selling price for Client 3&#39;s home: $896,962.50
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="&#38382;&#39064;-10---&#22238;&#31572;&#65306;">&#38382;&#39064; 10 - &#22238;&#31572;&#65306;<a class="anchor-link" href="#&#38382;&#39064;-10---&#22238;&#31572;&#65306;">&#182;</a></h3><p>预测模型相对合理。房屋数量越多、社区越富有，学生/老师越大， 价格越高。这点在客户3上很好的体现。在客户1、2中，虽然2的师生比高，但是房屋数量少，社区贫穷，价格更低。因此3个参数对价值的影响还会有不同的比重。</p>
+<h3 id="&#38382;&#39064;-10---&#22238;&#31572;&#65306;">&#38382;&#39064; 10 - &#22238;&#31572;&#65306;<a class="anchor-link" href="#&#38382;&#39064;-10---&#22238;&#31572;&#65306;">&#182;</a></h3><p>预测模型相对合理，3个数据均没有小于数据的最小值105000，也没有高于最大值10248000。 房屋数量越多、社区越富有，学生/老师越大， 价格越高。这点在客户3上很好的体现，远高于平均值。在客户1、2中，虽然2的师生比高，但是房屋数量少，社区贫穷，价格更低，因此3个参数对价值的影响还会有不同的比重。可以看出，客户1在3个参数中，每个参数都属于普通的数值，没有太高没有太低，因此其房屋应该属于普通类型，这与均价454342和中位数438900 很接近。说明客户1预测比较准确。</p>
 
 </div>
 </div>
